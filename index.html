@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ToDo List</title>
+</head>
+<body>
+    <div class="content">
+        <h1>ToDo List GN</h1>
+        <div class="categories">
+            <div class="categories-item">
+                <p class="categories-title">Games</p>
+            </div>
+            <div class="categories-item">
+                <p class="categories-title">Programação</p>
+            </div>
+            <div class="categories-item">
+                <p class="categories-title">Design</p>
+            </div>
+            <div class="categories-item">
+                <p class="categories-title">Univerisade</p>
+            </div>
+            <div class="categories-item">
+                <p class="categories-title">Pagamentos</p>
+            </div>
+            <div class="categories-item">
+                <p class="categories-title">Ações</p>
+            </div>
+            <div class="categories-item">
+                <p class="categories-title">Instagram</p>
+            </div>
+            <div class="categories-item">
+                <p class="categories-title">YouTube</p>
+            </div>
+        </div>
+        <div class="tasks">
+            <div>
+                <input type="text">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var showTasks           = false;
+    const categoriesElement = document.querySelector('.categories');
+    const categoriesItem    = document.querySelectorAll('.categories-item');
+    const tasksElement      = document.querySelector('.tasks');
+
+    for(let i = 0; i < categoriesItem.length; i++) {
+        categoriesItem[i].addEventListener("click",showTasksOrCategories);
+    }
+
+    function showTasksOrCategories(category){
+        showTasks = !showTasks;
+        if(showTasks)
+        {
+            categoriesElement.style.display = 'none';
+            tasksElement.style.display      = 'flex';
+        }
+    }
+
+</script>
+</html>
