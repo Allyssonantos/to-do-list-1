@@ -39,32 +39,64 @@
         <div class="tasks">
             <button onclick="showTasksOrCategories()">Voltar</button>
             <div>
-                <input type="text">
+                <input type="text" placeholder="Digite nova tasks" id="item">
+                <button onclick="newItem()">+</button>
+            </div>
+            <div>
+                <ul id="items-list">
+                </ul>
             </div>
         </div>
     </div>
 </body>
 <script>
     var showTasks           = false;
+    var activeCategory      = 0;
+    var ourItems            = [
+        {'category': 'Games', 'items': ['Game 1','Game 2']},
+        {'category': 'Programação', 'items': ['Programação 1','Programação 2']},
+    ];
     const categoriesElement = document.querySelector('.categories');
     const categoriesItem    = document.querySelectorAll('.categories-item');
     const tasksElement      = document.querySelector('.tasks');
 
     for(let i = 0; i < categoriesItem.length; i++) {
-        categoriesItem[i].addEventListener("click",showTasksOrCategories);
+        categoriesItem[i].addEventListener("click",() => {
+            showTasks = !showTasks;
+            activeCategory = i;
+            if(showTasks)
+            {
+                categoriesElement.style.display = 'none';
+                tasksElement.style.display      = 'flex';
+                setItems();
+            }
+            else
+            {
+                categoriesElement.style.display = 'flex';
+                tasksElement.style.display      = 'none';
+            }
+        });
     }
 
-    function showTasksOrCategories(category){
-        showTasks = !showTasks;
-        if(showTasks)
+    function setItems(){
+        var list = document.getElementById('items-list');
+        var counter = this.ourItems[activeCategory]['items'].length;
+        for(let i = 0; i < counter; i++)
         {
-            categoriesElement.style.display = 'none';
-            tasksElement.style.display      = 'flex';
+            var item = document.createElement('li');
+
+            item.innerHTML = this.ourItems[activeCategory]['items'][i];
+    
+            list.appendChild(item);
         }
-        else
+    }
+
+    function newItem(){
+        var name = document.getElementById('item').value;
+        if(name.length > 0)
         {
-            categoriesElement.style.display = 'flex';
-            tasksElement.style.display      = 'none';
+            ourItems[activeCategory]['items'].push(name);
+            setItems();
         }
     }
 
